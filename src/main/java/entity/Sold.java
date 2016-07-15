@@ -1,11 +1,14 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/7/13.
  */
-public class Sold {
+public class Sold implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private int s_num;
     private String rfid;
