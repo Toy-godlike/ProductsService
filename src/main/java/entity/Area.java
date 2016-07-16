@@ -1,9 +1,13 @@
 package entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/7/13.
  */
-public class Area {
+public class Area implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int a_num;
     private String a_name;

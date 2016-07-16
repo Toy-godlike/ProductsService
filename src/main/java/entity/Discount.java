@@ -1,11 +1,14 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/7/13.
  */
-public class Discount {
+public class Discount implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private int d_num;
     private String shapcode;
