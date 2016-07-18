@@ -47,6 +47,6 @@ public class DiscountDAOImpl implements DiscountDAO {
     }
 
     public List getDiscounts() {
-        return getCurrentSession().createQuery("from Discount ").list();
+        return getCurrentSession().createQuery("from Discount").list();
     }
 }
