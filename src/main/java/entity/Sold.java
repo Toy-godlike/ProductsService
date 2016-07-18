@@ -1,28 +1,42 @@
 package entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/7/13.
  */
+@Entity
+@Table(name = "Sold")
 public class Sold implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @Column(name = "Snum")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int s_num;
+    @Column(name = "Rfid",nullable = false,length = 50)
     private String rfid;
+    @Column(name = "Sdate",nullable = false)
     private Date s_date;
-    private int d_num;
+    @Column(name = "Sname",nullable = false,length = 50)
+    private int s_name;
+    @Column(name = "Oprice",nullable = false,length = 1)
+    private double o_price;
+    @Column(name = "Sprice",nullable = false,length = 1)
+    private double s_price;
 
     public Sold() {
     }
 
-    public Sold(int s_num, String rfid, Date s_date, int d_num) {
-        this.s_num = s_num;
+    public Sold(String rfid, Date s_date, int s_name, double o_price, double s_price) {
         this.rfid = rfid;
         this.s_date = s_date;
-        this.d_num = d_num;
+        this.s_name = s_name;
+        this.o_price = o_price;
+        this.s_price = s_price;
     }
 
     public int getS_num() {
@@ -49,11 +63,27 @@ public class Sold implements Serializable{
         this.s_date = s_date;
     }
 
-    public int getD_num() {
-        return d_num;
+    public int getS_name() {
+        return s_name;
     }
 
-    public void setD_num(int d_num) {
-        this.d_num = d_num;
+    public void setS_name(int s_name) {
+        this.s_name = s_name;
+    }
+
+    public double getO_price() {
+        return o_price;
+    }
+
+    public void setO_price(double o_price) {
+        this.o_price = o_price;
+    }
+
+    public double getS_price() {
+        return s_price;
+    }
+
+    public void setS_price(double s_price) {
+        this.s_price = s_price;
     }
 }

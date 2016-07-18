@@ -22,28 +22,27 @@ public class OnSale implements Serializable{
     private String rfid;
 //    @Column(name = "Shapcode",nullable = false,length = 20)
 //    private String shapcode;
-    @Column(name = "Anum",nullable = false,length = 1)
-    private int a_num;
+//    @Column(name = "Anum",nullable = false,length = 1)
+//    private int a_num;
 
     @ManyToOne(targetEntity = Products.class)
     @JoinColumn(name = "Shapcode",nullable = false)
     @Cascade(CascadeType.ALL)
     private Products products;
 
+    @ManyToOne(targetEntity = Area.class)
+    @JoinColumn(name = "Anum",nullable = false)
+    @Cascade(CascadeType.ALL)
+    private Area area;
+
     public OnSale() {
     }
 
-    public OnSale(String rfid, int a_num, Products products) {
+    public OnSale(String rfid, Products products, Area area) {
         this.rfid = rfid;
-        this.a_num = a_num;
         this.products = products;
+        this.area = area;
     }
-
-    //    public OnSale(String rfid, String shapcode, int a_num) {
-//        this.rfid = rfid;
-//        this.shapcode = shapcode;
-//        this.a_num = a_num;
-//    }
 
     public String getRfid() {
         return rfid;
@@ -61,13 +60,13 @@ public class OnSale implements Serializable{
 //        this.shapcode = shapcode;
 //    }
 
-    public int getA_num() {
-        return a_num;
-    }
-
-    public void setA_num(int a_num) {
-        this.a_num = a_num;
-    }
+//    public int getA_num() {
+//        return a_num;
+//    }
+//
+//    public void setA_num(int a_num) {
+//        this.a_num = a_num;
+//    }
 
     public Products getProducts() {
         return products;
@@ -75,5 +74,13 @@ public class OnSale implements Serializable{
 
     public void setProducts(Products products) {
         this.products = products;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
 }

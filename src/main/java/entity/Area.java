@@ -1,16 +1,26 @@
 package entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/7/13.
  */
+@Entity
+@Table(name = "Area")
 public class Area implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @Column(name = "Anum",nullable = false,length = 1)
     private int a_num;
+    @Column(name = "Aname",nullable = false,length = 255)
     private String a_name;
+    @Column(name = "Location",length = 255)
     private String location;
 
     public Area() {

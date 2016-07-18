@@ -65,4 +65,5 @@ public class Products implements Serializable{
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
 }

@@ -1,3 +1,4 @@
+import entity.Area;
 import entity.OnSale;
 import entity.Products;
 import org.junit.Test;
@@ -22,8 +23,15 @@ public class TestHibernate {
         String rfid = "11111111";
         OnSale obj1 = onSaleService.getOnSale(rfid);
         Products obj2 = obj1.getProducts();
+        Area obj3 = obj1.getArea();
         System.out.println(obj1.getRfid());
         System.out.println(obj2.getShapcode());
         System.out.println(obj2.getPname());
+        System.out.println(obj3.getA_name());
+        System.out.println(obj3.getLocation());
+
+        Products products = new Products("0002","可乐",3.5);
+        OnSale onSale = new OnSale("22222222",products,obj3);
+        onSaleService.addOnSale(onSale);
     }
 }

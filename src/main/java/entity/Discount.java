@@ -1,30 +1,48 @@
 package entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2016/7/13.
  */
+@Entity
+@Table(name = "Discount")
 public class Discount implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @Column(name = "Dnum",nullable = false,length = 1)
     private int d_num;
-    private String shapcode;
+    //private String shapcode;
+    @Column(name = "Disc",nullable = false,length = 1)
     private float disc;
+    @Column(name = "BeginDate",nullable = false)
     private Date beginDate;
+    @Column(name = "EndDate",nullable = false)
     private Date endDate;
+
+    @OneToOne(targetEntity = Products.class)
+    @JoinColumn(name = "Shapcode",nullable = false)
+    @Cascade(CascadeType.ALL)
+    private Products products;
 
     public Discount() {
     }
 
-    public Discount(int d_num, String shapcode, float disc, Date beginDate, Date endDate) {
+    public Discount(int d_num, float disc, Date beginDate, Date endDate, Products products) {
         this.d_num = d_num;
-        this.shapcode = shapcode;
         this.disc = disc;
         this.beginDate = beginDate;
         this.endDate = endDate;
+        this.products = products;
     }
 
     public int getD_num() {
@@ -35,13 +53,13 @@ public class Discount implements Serializable{
         this.d_num = d_num;
     }
 
-    public String getShapcode() {
-        return shapcode;
-    }
-
-    public void setShapcode(String shapcode) {
-        this.shapcode = shapcode;
-    }
+//    public String getShapcode() {
+//        return shapcode;
+//    }
+//
+//    public void setShapcode(String shapcode) {
+//        this.shapcode = shapcode;
+//    }
 
     public float getDisc() {
         return disc;
@@ -65,5 +83,13 @@ public class Discount implements Serializable{
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Products getProducts() {
+        return products;
+    }
+
+    public void setProducts(Products products) {
+        this.products = products;
     }
 }
