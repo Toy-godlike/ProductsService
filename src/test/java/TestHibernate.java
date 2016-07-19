@@ -1,4 +1,6 @@
+import dao.DiscountDAO;
 import entity.Area;
+import entity.Discount;
 import entity.OnSale;
 import entity.Products;
 import org.junit.Test;
@@ -18,6 +20,7 @@ public class TestHibernate {
     @Autowired
     private OnSaleService onSaleService;
 
+    /*
     @Test
     public void testOnSale(){
         String rfid = "11111111";
@@ -33,5 +36,14 @@ public class TestHibernate {
         Products products = new Products("0002","可乐",3.5);
         OnSale onSale = new OnSale("22222222",products,obj3);
         onSaleService.addOnSale(onSale);
+    }*/
+
+//    @Autowired
+//    private DiscountDAO discountDAO;
+
+    @Test
+    public void testDiscount(){
+        Discount discount = onSaleService.getDiscountByShapcode("3333");
+        System.out.println(discount.getDisc());
     }
 }

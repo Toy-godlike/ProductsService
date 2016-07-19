@@ -1,11 +1,14 @@
 package dao;
 
 import entity.Discount;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,6 +46,19 @@ public class DiscountDAOImpl implements DiscountDAO {
 
     public Discount getDiscount(int d_num) {
         Discount discount = (Discount) getCurrentSession().get(Discount.class,d_num);
+        return discount;
+    }
+
+    public Discount getDiscountByShapcode(String shapcode) {
+        //Discount discount = (Discount) getCurrentSession().get(Discount.class,shapcode);
+        Date date = new Date();
+        Query qy = getCurrentSession().createQuery("from Discount where products.shapcode = :key1 " +
+                "and beginDate <= :key2 " +
+                "and endDate >= :key3")
+                .setString("key1",shapcode)
+                .setDate("key2",date)
+                .setDate("key3",date);
+        Discount discount = (Discount) qy.uniqueResult();
         return discount;
     }
 

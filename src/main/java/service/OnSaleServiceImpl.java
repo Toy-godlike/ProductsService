@@ -1,6 +1,8 @@
 package service;
 
+import dao.DiscountDAO;
 import dao.OnSaleDAO;
+import entity.Discount;
 import entity.OnSale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class OnSaleServiceImpl implements OnSaleService {
     @Autowired
     private OnSaleDAO onSaleDAO;
 
+    @Autowired
+    private DiscountDAO discountDAO;
+
     public void addOnSale(OnSale onSale) {
         onSaleDAO.addOnSale(onSale);
     }
@@ -23,5 +28,10 @@ public class OnSaleServiceImpl implements OnSaleService {
     public OnSale getOnSale(String rfid) {
         OnSale onSale = onSaleDAO.getOnSale(rfid);
         return onSale;
+    }
+
+    public Discount getDiscountByShapcode(String shapcode) {
+        Discount discount = discountDAO.getDiscountByShapcode(shapcode);
+        return discount;
     }
 }

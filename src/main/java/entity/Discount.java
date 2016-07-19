@@ -22,7 +22,7 @@ public class Discount implements Serializable{
     @Column(name = "Dnum",nullable = false,length = 1)
     private int d_num;
     //private String shapcode;
-    @Column(name = "Disc",nullable = false,length = 1)
+    @Column(name = "Disc",nullable = false,length = 3)
     private float disc;
     @Column(name = "BeginDate",nullable = false)
     private Date beginDate;

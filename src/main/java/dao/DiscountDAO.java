@@ -12,5 +12,6 @@ public interface DiscountDAO {
     public void deleteDiscount(int d_num);
     public void updateDiscount(Discount discount);
     public Discount getDiscount(int d_num);
+    public Discount getDiscountByShapcode(String shapcode);
     public List getDiscounts();
 }

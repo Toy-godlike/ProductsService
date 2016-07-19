@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="
+            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+            http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context-4.1.xsd">
     <!-- 加载配置文件 -->
 
+    <context:annotation-config/>
+
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!-- 扫描service自动注入为bean -->
     <context:component-scan base-package="service,dao" />
+
+    <!-- 响应超市端WebService-->
+    <jaxws:endpoint id="supermarketWS" implementor="service.SupermarketServiceImpl" address="/supermarketws" />
+
+    <!--响应用户端WebService-->
+    <jaxws:endpoint id="userWS" implementor="service.UserServiceImpl" address="/userws" />
 
 </beans>

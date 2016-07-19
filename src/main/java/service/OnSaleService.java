@@ -1,5 +1,6 @@
 package service;
 
+import entity.Discount;
 import entity.OnSale;
 
 /**
@@ -8,4 +9,5 @@ import entity.OnSale;
 public interface OnSaleService {
     public void addOnSale(OnSale onSale);
     public OnSale getOnSale(String rfid);
+    public Discount getDiscountByShapcode(String shapcode);
 }
