@@ -1,19 +1,25 @@
 package service;
 
+import entity.Area;
 import entity.Discount;
 import entity.OnSale;
+import entity.Products;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/7/19.
  */
-@WebService
 public interface SupermarketService {
 
-    @WebMethod
     public boolean saveOnSale(OnSale onSale);
-    @WebMethod
     public boolean saveDiscount(Discount discount);
+    public boolean saveArea(Area area);
+    public boolean saveProduct(Products products);
+    public List<OnSale> getOnSales();
+    public List<Discount> getDiscounts();
+    public List<Products> getProductsAll();
+    public List<Area> getAreas();
 }
