@@ -16,13 +16,8 @@
     <!-- 扫描service自动注入为bean -->
     <context:component-scan base-package="service,dao" />
 
-    <!-- 响应超市端WebService -->
-    <jaxws:endpoint id="supermarketWS" implementor="service.SupermarketServiceImpl" address="/supermarketws" />
 
     <!-- 响应用户端WebService -->
     <jaxws:endpoint id="userWS" implementor="service.UserServiceImpl" address="/userws" />
-
-    <!-- 响应检测端WebService -->
-    <jaxws:endpoint id="detectionWS" implementor="service.DetectionServiceImpl" address="/detectionws" />
 
 </beans>

@@ -9,7 +9,7 @@ import javax.jws.WebService;
 /**
  * Created by Administrator on 2016/7/19.
  */
-@WebService
+@WebService(endpointInterface = "service.DetectionService")
 public class DetectionServiceImpl implements DetectionService {
 
     @Autowired

@@ -13,7 +13,7 @@ import javax.jws.WebService;
 /**
  * Created by Administrator on 2016/7/19.
  */
-@WebService
+@WebService(endpointInterface = "service.UserService")
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -43,5 +43,10 @@ public class UserServiceImpl implements UserService{
             return false;
         }
         return true;
+    }
+
+    public String testHello() {
+        String test = "success!";
+        return test;
     }
 }
