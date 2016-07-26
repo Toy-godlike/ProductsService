@@ -18,6 +18,6 @@
 
 
     <!-- 响应用户端WebService -->
-    <jaxws:endpoint id="userWS" implementor="service.UserServiceImpl" address="/userws" />
+    <jaxws:endpoint id="detectionWS" implementor="service.DetectionServiceImpl" address="/detectionws" />
 
 </beans>

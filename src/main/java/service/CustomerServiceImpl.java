@@ -9,12 +9,12 @@ import entity.Sold;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/7/19.
  */
-@WebService(endpointInterface = "service.UserService")
-public class UserServiceImpl implements UserService{
+public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private OnSaleDAO onSaleDAO;
@@ -35,18 +35,19 @@ public class UserServiceImpl implements UserService{
         return discount;
     }
 
+    public List<Discount> getDiscounts() {
+        return discountDAO.getDiscounts();
+    }
+
     public boolean saveSold(Sold sold) {
         try {
             soldDAO.addSold(sold);
+            String rfid = sold.getRfid();
+            onSaleDAO.deleteOnSale(rfid);
         }catch (Exception e){
             e.printStackTrace();
             return false;
         }
         return true;
-    }
-
-    public String testHello() {
-        String test = "success!";
-        return test;
     }
 }

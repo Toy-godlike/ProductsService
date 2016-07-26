@@ -1,10 +1,13 @@
 package entity;
 
-import javax.persistence.Column;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2016/7/13.
@@ -20,10 +23,14 @@ public class Products implements Serializable{
     private String shapcode;
     @Column(name = "Pname",nullable = false,length = 50)
     private String pname;
-    @Column(name = "Price",nullable = false,length = 1)
+    @Column(name = "Price",nullable = false,length = 10)
     private double price;
     @Column(name = "Picture",length = 255)
     private String picture;
+
+    @OneToMany(mappedBy = "products",targetEntity = Discount.class)
+    @Cascade(CascadeType.ALL)
+    private Set<Discount> discountSet;
 
     public Products() {
     }
@@ -66,4 +73,11 @@ public class Products implements Serializable{
         this.picture = picture;
     }
 
+    public Set<Discount> getDiscountSet() {
+        return discountSet;
+    }
+
+    public void setDiscountSet(Set<Discount> discountSet) {
+        this.discountSet = discountSet;
+    }
 }

@@ -43,7 +43,6 @@ public class TestHibernate {
 
     @Test
     public void testDiscount(){
-        Discount discount = onSaleService.getDiscountByShapcode("3333");
-        System.out.println(discount.getDisc());
+       onSaleService.saveDiscount();
     }
 }

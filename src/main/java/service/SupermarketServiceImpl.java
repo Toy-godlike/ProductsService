@@ -1,7 +1,9 @@
 package service;
 
+import dao.AreaDAO;
 import dao.DiscountDAO;
 import dao.OnSaleDAO;
+import dao.ProductsDAO;
 import entity.Area;
 import entity.Discount;
 import entity.OnSale;
@@ -21,6 +23,12 @@ public class SupermarketServiceImpl implements SupermarketService {
 
     @Autowired
     private DiscountDAO discountDAO;
+
+    @Autowired
+    private AreaDAO areaDAO;
+
+    @Autowired
+    private ProductsDAO productsDAO;
 
     public boolean saveOnSale(OnSale onSale) {
         try {
@@ -43,26 +51,38 @@ public class SupermarketServiceImpl implements SupermarketService {
     }
 
     public boolean saveArea(Area area) {
-        return false;
+        try {
+            areaDAO.addArea(area);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean saveProduct(Products products) {
-        return false;
+        try {
+            productsDAO.addProducts(products);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public List<OnSale> getOnSales() {
-        return null;
+        return onSaleDAO.getOnSales();
     }
 
     public List<Discount> getDiscounts() {
-        return null;
+        return discountDAO.getDiscounts();
     }
 
     public List<Products> getProductsAll() {
-        return null;
+        return productsDAO.getProductsAll();
     }
 
     public List<Area> getAreas() {
-        return null;
+        return areaDAO.getAreas();
     }
 }

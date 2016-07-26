@@ -29,7 +29,7 @@ public class Discount implements Serializable{
     @Column(name = "EndDate",nullable = false)
     private Date endDate;
 
-    @OneToOne(targetEntity = Products.class)
+    @ManyToOne(targetEntity = Products.class)
     @JoinColumn(name = "Shapcode",nullable = false)
     @Cascade(CascadeType.ALL)
     private Products products;
