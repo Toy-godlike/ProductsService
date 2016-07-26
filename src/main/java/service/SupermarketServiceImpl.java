@@ -9,6 +9,8 @@ import entity.Discount;
 import entity.OnSale;
 import entity.Products;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/7/19.
  */
+@Service("supermarketService")
+@Transactional
 public class SupermarketServiceImpl implements SupermarketService {
 
     @Autowired
