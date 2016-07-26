@@ -2,16 +2,18 @@ package service;
 
 import dao.DiscountDAO;
 import dao.OnSaleDAO;
+import entity.Area;
 import entity.Discount;
 import entity.OnSale;
+import entity.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/7/19.
  */
-@WebService
 public class SupermarketServiceImpl implements SupermarketService {
 
     @Autowired
@@ -38,5 +40,29 @@ public class SupermarketServiceImpl implements SupermarketService {
             return false;
         }
         return true;
+    }
+
+    public boolean saveArea(Area area) {
+        return false;
+    }
+
+    public boolean saveProduct(Products products) {
+        return false;
+    }
+
+    public List<OnSale> getOnSales() {
+        return null;
+    }
+
+    public List<Discount> getDiscounts() {
+        return null;
+    }
+
+    public List<Products> getProductsAll() {
+        return null;
+    }
+
+    public List<Area> getAreas() {
+        return null;
     }
 }
