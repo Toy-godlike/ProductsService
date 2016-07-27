@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import service.CustomerService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value="/getPro",method = RequestMethod.POST)
+    @ResponseBody
     public Map<String,Object> getProductInfo(HttpServletRequest request,HttpServletResponse response){
         String rfid = request.getParameter("rfid");
         OnSale onSale = customerService.getProductInfo(rfid);
@@ -43,6 +45,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/getDis",method = RequestMethod.POST)
+    @ResponseBody
     public Map<String,Object> getDiscountInfo(){
         List<Discount> discountList = customerService.getDiscounts();
         Map<String, Object> modelMap = new HashMap<String, Object>(2);
@@ -52,6 +55,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
     public Map<String,Object> saveSold(HttpServletRequest request,HttpServletResponse response){
         String rfid = request.getParameter("rfid");
         String s_name = request.getParameter("s_name");
