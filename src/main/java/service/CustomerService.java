@@ -14,5 +14,5 @@ public interface CustomerService {
     public OnSale getProductInfo(String rfid);
     public Discount getDiscountInfo(String shapcode);
     public List<Discount> getDiscounts();
-    public boolean saveSold(Sold sold);
+    public boolean saveSold(String s_num,String s_name,String rfid,String s_date,String s_price,String o_price);
 }

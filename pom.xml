@@ -39,6 +39,11 @@
       <artifactId>jackson-core</artifactId>
       <version>2.6.4</version>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+    </dependency>
 
     <!-- Spring -->
     <dependency>
@@ -114,23 +119,6 @@
       <version>1.0.1.Final</version>
     </dependency>
 
-    <!-- cxf -->
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>apache-cxf</artifactId>
-      <version>2.6.2</version>
-      <type>pom</type>
-      <exclusions>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-asm</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-jms</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
   </dependencies>
   <build>
     <finalName>toy-products-service</finalName>

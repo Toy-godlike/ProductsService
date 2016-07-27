@@ -23,9 +23,9 @@ public class Sold implements Serializable{
     private Date s_date;
     @Column(name = "Sname",nullable = false,length = 50)
     private String s_name;
-    @Column(name = "Oprice",nullable = false,length = 1)
+    @Column(name = "Oprice",nullable = false,length = 10)
     private double o_price;
-    @Column(name = "Sprice",nullable = false,length = 1)
+    @Column(name = "Sprice",nullable = false,length = 10)
     private double s_price;
 
     public Sold() {

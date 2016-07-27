@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,10 +46,25 @@ public class CustomerServiceImpl implements CustomerService{
         return discountDAO.getDiscounts();
     }
 
-    public boolean saveSold(Sold sold) {
+    public boolean saveSold(String s_num,String s_name,String rfid,String s_date,String s_price,String o_price) {
+        Sold sold = new Sold();
+        sold.setS_name(s_name);
+        sold.setRfid(rfid);
+        int snum = Integer.parseInt(s_num);
+        double sprice = Double.parseDouble(s_price);
+        double oprice = Double.parseDouble(o_price);
+        sold.setS_num(snum);
+        sold.setS_price(sprice);
+        sold.setO_price(oprice);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date sdate = sdf.parse(s_date);
+            sold.setS_date(sdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         try {
             soldDAO.addSold(sold);
-            String rfid = sold.getRfid();
             onSaleDAO.deleteOnSale(rfid);
         }catch (Exception e){
             e.printStackTrace();
