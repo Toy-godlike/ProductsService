@@ -46,16 +46,16 @@ public class CustomerServiceImpl implements CustomerService{
         return discountDAO.getDiscounts();
     }
 
-    public boolean saveSold(String s_num,String s_name,String rfid,String s_date,String s_price,String o_price) {
+    public boolean saveSold(int s_num,String shapcode,String rfid,String s_date,double s_price,double o_price) {
         Sold sold = new Sold();
-        sold.setS_name(s_name);
         sold.setRfid(rfid);
-        int snum = Integer.parseInt(s_num);
-        double sprice = Double.parseDouble(s_price);
-        double oprice = Double.parseDouble(o_price);
-        sold.setS_num(snum);
-        sold.setS_price(sprice);
-        sold.setO_price(oprice);
+        sold.setShapcode(shapcode);
+//        int snum = Integer.parseInt(s_num);
+//        double sprice = Double.parseDouble(s_price);
+//        double oprice = Double.parseDouble(o_price);
+        sold.setS_num(s_num);
+        sold.setS_price(s_price);
+        sold.setO_price(o_price);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date sdate = sdf.parse(s_date);
@@ -71,5 +71,29 @@ public class CustomerServiceImpl implements CustomerService{
             return false;
         }
         return true;
+    }
+
+    public boolean saveSolds(Sold[] solds) {
+        try {
+            for (int i = 0; i < solds.length; i++) {
+                soldDAO.addSold(solds[i]);
+                onSaleDAO.deleteOnSale(solds[i].getRfid());
+            }
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean saveSoldtest(Sold sold) {
+        try {
+            soldDAO.addSold(sold);
+            onSaleDAO.deleteOnSale(sold.getRfid());
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

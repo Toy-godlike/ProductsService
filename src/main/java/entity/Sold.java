@@ -21,22 +21,22 @@ public class Sold implements Serializable{
     private String rfid;
     @Column(name = "Sdate",nullable = false)
     private Date s_date;
-    @Column(name = "Sname",nullable = false,length = 50)
-    private String s_name;
     @Column(name = "Oprice",nullable = false,length = 10)
     private double o_price;
     @Column(name = "Sprice",nullable = false,length = 10)
     private double s_price;
+    @Column(name = "Shapcode",nullable = false,length = 20)
+    private String shapcode;
 
     public Sold() {
     }
 
-    public Sold(String rfid, Date s_date, String s_name, double o_price, double s_price) {
+    public Sold(String rfid, Date s_date, double o_price, double s_price, String shapcode) {
         this.rfid = rfid;
         this.s_date = s_date;
-        this.s_name = s_name;
         this.o_price = o_price;
         this.s_price = s_price;
+        this.shapcode = shapcode;
     }
 
     public int getS_num() {
@@ -63,14 +63,6 @@ public class Sold implements Serializable{
         this.s_date = s_date;
     }
 
-    public String getS_name() {
-        return s_name;
-    }
-
-    public void setS_name(String s_name) {
-        this.s_name = s_name;
-    }
-
     public double getO_price() {
         return o_price;
     }
@@ -85,5 +77,13 @@ public class Sold implements Serializable{
 
     public void setS_price(double s_price) {
         this.s_price = s_price;
+    }
+
+    public String getShapcode() {
+        return shapcode;
+    }
+
+    public void setShapcode(String shapcode) {
+        this.shapcode = shapcode;
     }
 }

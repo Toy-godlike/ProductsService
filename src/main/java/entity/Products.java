@@ -35,10 +35,11 @@ public class Products implements Serializable{
     public Products() {
     }
 
-    public Products(String shapcode, String pname, double price) {
+    public Products(String shapcode, String pname, double price, String picture) {
         this.shapcode = shapcode;
         this.pname = pname;
         this.price = price;
+        this.picture = picture;
     }
 
     public String getShapcode() {

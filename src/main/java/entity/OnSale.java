@@ -27,12 +27,12 @@ public class OnSale implements Serializable{
 
     @ManyToOne(targetEntity = Products.class)
     @JoinColumn(name = "Shapcode",nullable = false)
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Products products;
 
     @ManyToOne(targetEntity = Area.class)
     @JoinColumn(name = "Anum",nullable = false)
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Area area;
 
     public OnSale() {

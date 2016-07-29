@@ -35,10 +35,10 @@ public class SoldDAOImpl implements SoldDAO{
     public void updateSold(Sold sold) {
         Sold soldToUpdate = getSold(sold.getS_num());
         soldToUpdate.setRfid(sold.getRfid());
-        soldToUpdate.setS_name(sold.getS_name());
         soldToUpdate.setS_date(sold.getS_date());
         soldToUpdate.setO_price(sold.getO_price());
         soldToUpdate.setS_price(sold.getS_price());
+        soldToUpdate.setShapcode(sold.getShapcode());
         getCurrentSession().update(soldToUpdate);
     }
 

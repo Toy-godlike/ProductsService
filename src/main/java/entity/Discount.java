@@ -31,7 +31,7 @@ public class Discount implements Serializable{
 
     @ManyToOne(targetEntity = Products.class)
     @JoinColumn(name = "Shapcode",nullable = false)
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Products products;
 
     public Discount() {

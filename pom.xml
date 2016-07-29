@@ -45,6 +45,44 @@
       <version>2.5</version>
     </dependency>
 
+    <!-- json -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.ezmorph</groupId>
+      <artifactId>ezmorph</artifactId>
+      <version>1.0.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.8.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.6.4</version>
+    </dependency>
+
+
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -127,6 +165,23 @@
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <warName>${project.artifactId}</warName>
+          <webResources>
+            <resource>
+              <directory>libraries/</directory>
+              <targetPath>WEB-INF/lib</targetPath>
+              <includes>
+                <include>**/*.jar</include>
+              </includes>
+            </resource>
+          </webResources>
+        </configuration>
       </plugin>
     </plugins>
   </build>
