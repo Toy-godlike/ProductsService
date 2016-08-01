@@ -1,7 +1,7 @@
 package controller;
 
+import entity.Area;
 import entity.Discount;
-import entity.OnSale;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
-import util.AreaForTrans;
+import util.DiscountForTrans;
 import util.ProductForTrans;
+import util.ProductInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,29 +44,20 @@ public class CustomerController {
     @RequestMapping(value="/getPro",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getProductInfo(@RequestParam("rfid") String rfid){
-        OnSale onSale = customerService.getProductInfo(rfid);
-        ProductForTrans productForTrans = new ProductForTrans();
-        productForTrans.setShapcode(onSale.getProducts().getShapcode());
-        productForTrans.setPname(onSale.getProducts().getPname());
-        productForTrans.setPrice(onSale.getProducts().getPrice());
-        productForTrans.setPicture(onSale.getProducts().getPicture());
-        AreaForTrans areaForTrans = new AreaForTrans();
-        areaForTrans.setA_num(onSale.getArea().getA_num());
-        areaForTrans.setA_name(onSale.getArea().getA_name());
-        areaForTrans.setLocation(onSale.getArea().getLocation());
-        Map<String, Object> modelMap = new HashMap<String, Object>(2);
-        modelMap.put("product",productForTrans);
-        modelMap.put("area",areaForTrans);
+        ProductInfo productInfo = customerService.getProductInfo(rfid);
+        Map<String, Object> modelMap = new HashMap<String, Object>(3);
+        modelMap.put("product",productInfo.getProductForTrans());
+        modelMap.put("area",productInfo.getAreaForTrans());
+        modelMap.put("discount",productInfo.getDiscountForTrans());
         return modelMap;
     }
 
     @RequestMapping(value = "/getDis",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getDiscountInfo(){
-        List<Discount> discountList = customerService.getDiscounts();
-        Map<String, Object> modelMap = new HashMap<String, Object>(2);
-        modelMap.put("total","1");
-        modelMap.put("rows",discountList);
+       List list = customerService.getDiscounts();
+        Map<String, Object> modelMap = new HashMap<String, Object>(1);
+        modelMap.put("discountInfo",list);
         return modelMap;
     }
 
@@ -104,6 +97,21 @@ public class CustomerController {
         String s_date = jsonObject.getString("s_date");*/
         Map<String, Object> modelMap = new HashMap<String, Object>(1);
         modelMap.put("result",result);
+        return modelMap;
+    }
+
+    @RequestMapping(value="/search",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> searchProductLoc(@RequestParam("pname") String pname){
+/*        String name = "";
+        try {
+            name = URLDecoder.decode(pname, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
+        List list = customerService.getProductLoc(pname);
+        Map<String, Object> modelMap = new HashMap<String, Object>(1);
+        modelMap.put("location",list);
         return modelMap;
     }
 }

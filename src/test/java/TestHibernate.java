@@ -43,6 +43,7 @@ public class TestHibernate {
 
     @Test
     public void testDiscount(){
-       onSaleService.saveDiscount();
+        int temp = onSaleService.getAnum("3333");
+        System.out.println("--------------------" + temp);
     }
 }

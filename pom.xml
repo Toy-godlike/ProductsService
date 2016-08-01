@@ -162,6 +162,17 @@
     <finalName>toy-products-service</finalName>
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <extdirs>${project.basedir}/lib</extdirs>
+          </compilerArguments>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.2</version>
@@ -174,8 +185,9 @@
           <warName>${project.artifactId}</warName>
           <webResources>
             <resource>
-              <directory>libraries/</directory>
+              <directory>${project.basedir}/lib</directory>
               <targetPath>WEB-INF/lib</targetPath>
+              <filtering>true</filtering>
               <includes>
                 <include>**/*.jar</include>
               </includes>

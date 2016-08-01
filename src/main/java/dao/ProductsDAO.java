@@ -13,4 +13,5 @@ public interface ProductsDAO {
     public void deleteProducts(String shapcode);
     public void updateProducts(Products products);
     public List getProductsAll();
+    public List<Products> searchProduct(String pname);
 }

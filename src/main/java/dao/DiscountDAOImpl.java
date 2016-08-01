@@ -62,6 +62,10 @@ public class DiscountDAOImpl implements DiscountDAO {
     }
 
     public List getDiscounts() {
-        return getCurrentSession().createQuery("from Discount").list();
+        Date date = new Date();
+        return getCurrentSession().createQuery("from Discount where beginDate <= :key1 " +
+                "and endDate >= :key2")
+                .setDate("key1",date)
+                .setDate("key2",date).list();
     }
 }

@@ -47,4 +47,10 @@ public class OnSaleDAOImpl implements OnSaleDAO {
     public List getOnSales() {
         return getCurrentSession().createQuery("from OnSale").list();
     }
+
+    public int getAnum(String shapcode) {
+        Integer anum = (Integer) getCurrentSession().createQuery("select distinct area.a_num from OnSale where products.shapcode = :key1")
+                .setString("key1",shapcode).uniqueResult();
+        return anum;
+    }
 }

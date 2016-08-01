@@ -49,4 +49,11 @@ public class ProductsDAOImpl implements ProductsDAO{
     public List getProductsAll() {
         return getCurrentSession().createQuery("from Products").list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Products> searchProduct(String pname) {
+        List<Products> pros = getCurrentSession().createQuery("from Products where " +
+                "pname like :key1").setString("key1","%" + pname + "%").list();
+        return pros;
+    }
 }

@@ -63,4 +63,9 @@ public class OnSaleServiceImpl implements OnSaleService {
         }
 
     }
+
+    public int getAnum(String shapcode) {
+        int temp = onSaleDAO.getAnum(shapcode);
+        return temp;
+    }
 }
