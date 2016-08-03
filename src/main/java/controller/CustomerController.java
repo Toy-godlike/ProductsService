@@ -1,7 +1,5 @@
 package controller;
 
-import entity.Area;
-import entity.Discount;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
-import util.DiscountForTrans;
-import util.ProductForTrans;
 import util.ProductInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
