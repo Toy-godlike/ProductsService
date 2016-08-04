@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -44,9 +50,9 @@
                 <li class="menu-list nav-active"><a href=""><i class="fa fa-laptop"></i> <span>录入信息</span></a>
                     <ul class="sub-menu-list">
                         <li ><a href="area_insert.jsp"> 超市地图 </a></li>
-                        <li ><a href="product_insert.html"> 产品信息 </a></li>
-                        <li ><a href="onsale_insert.html">产品上架</a></li>
-                        <li class="active"><a href="discount_insert.html"> 打折信息</a></li>
+                        <li ><a href="product_insert.jsp"> 产品信息 </a></li>
+                        <li class="active"><a href="onsale_insert.jsp">产品上架</a></li>
+                        <li><a href="discount_insert.jsp"> 打折信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
@@ -103,7 +109,7 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                产品打折信息录入
+                产品上架信息录入
             </h3>
         </div>
         <!-- page heading end-->
@@ -115,51 +121,56 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            产品打折信息
+                            产品上架信息
                         </header>
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal adminex-form">
+                            <div role="form" class="form-horizontal adminex-form">
                                 <div class="form-group has-success">
-                                    <label class="col-lg-2 control-label">打折信息编号</label>
+                                    <label class="col-lg-2 control-label">产品条形码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="f-name" class="form-control">
+                                        <input type="text" placeholder="" id="shapcode" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-error">
-                                    <label class="col-lg-2 control-label">产品条形码</label>
+                                    <label class="col-lg-2 control-label">产品RFID标签码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="l-name" class="form-control">
+                                        <input type="text" placeholder="" id="rfid" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">打折比率</label>
+                                    <label class="col-lg-2 control-label">所在区域编号</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">
+                                        <input type="text" placeholder="" id="areaNum" class="form-control">
                                         
                                     </div>
                                 </div>								
-								<div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">开始日期</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">
-                                        
-                                    </div>
-                                </div>
-								<div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">结束日期</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">
-                                        
-                                    </div>
-                                </div>
+
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-primary" onclick="javascript:submitOnsaleInfo()" type="button">提交</button>
                                     </div>
                                 </div>
-                            </form>
+								<script>
+									function submitOnsaleInfo(){
+										//alert("a");
+										var shapcode = $("#shapcode").val();
+										var rfid = $("#rfid").val();
+										var areaNum = $("#areaNum").val();
+										var postData = "shapcode="+shapcode+"&rfid="+rfid+"&a_num="+areaNum;
+										$.ajax({
+											type:"POST",
+											url:"<%= request.getContextPath()%>/supermarket/addOnSale",
+											data:postData,
+											dataType:"text",
+											success:function(data){
+												alert(data);				
+											}
+										});
+									}
+								</script>
+                            </div>
                         </div>
                     </section>
                 </div>

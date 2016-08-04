@@ -11,6 +11,8 @@ import entity.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import util.DiscountForTrans;
+import util.OnSaleForTrans;
 
 import javax.jws.WebService;
 import java.util.List;
@@ -34,7 +36,13 @@ public class SupermarketServiceImpl implements SupermarketService {
     @Autowired
     private ProductsDAO productsDAO;
 
-    public boolean saveOnSale(OnSale onSale) {
+    public boolean saveOnSale(OnSaleForTrans onSaleForTrans) {
+        Products products = productsDAO.getProducts(onSaleForTrans.getShapcode());
+        Area area = areaDAO.getArea(onSaleForTrans.getA_num());
+        OnSale onSale = new OnSale();
+        onSale.setProducts(products);
+        onSale.setArea(area);
+        onSale.setRfid(onSaleForTrans.getRfid());
         try {
             onSaleDAO.addOnSale(onSale);
         }catch (Exception e){
@@ -44,7 +52,14 @@ public class SupermarketServiceImpl implements SupermarketService {
         return true;
     }
 
-    public boolean saveDiscount(Discount discount) {
+    public boolean saveDiscount(DiscountForTrans discountForTrans) {
+        Products products = productsDAO.getProducts(discountForTrans.getShapcode());
+        Discount discount = new Discount();
+        discount.setD_num(discountForTrans.getD_num());
+        discount.setProducts(products);
+        discount.setDisc(discountForTrans.getDisc());
+        discount.setBeginDate(discountForTrans.getBeginDate());
+        discount.setEndDate(discountForTrans.getEndDate());
         try {
             discountDAO.addDiscount(discount);
         }catch (Exception e){

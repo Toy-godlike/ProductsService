@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -11,6 +17,13 @@
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
+  
+  
+  <!--multi-select-->
+    <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
+
+    <!--file upload-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.min.css" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -44,9 +57,9 @@
                 <li class="menu-list nav-active"><a href=""><i class="fa fa-laptop"></i> <span>录入信息</span></a>
                     <ul class="sub-menu-list">
                         <li ><a href="area_insert.jsp"> 超市地图 </a></li>
-                        <li ><a href="product_insert.html"> 产品信息 </a></li>
-                        <li class="active"><a href="onsale_insert.html">产品上架</a></li>
-                        <li><a href="discount_insert.html"> 打折信息</a></li>
+                        <li class="active"><a href="product_insert.jsp"> 产品信息 </a></li>
+                        <li><a href="onsale_insert.jsp">产品上架</a></li>
+                        <li><a href="discount_insert.jsp"> 打折信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
@@ -103,7 +116,7 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                产品上架信息录入
+                产品信息录入
             </h3>
         </div>
         <!-- page heading end-->
@@ -115,44 +128,95 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            产品上架信息
+                            产品信息
                         </header>
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal adminex-form">
+                            <div role="form" class="form-horizontal adminex-form">
                                 <div class="form-group has-success">
                                     <label class="col-lg-2 control-label">产品条形码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="f-name" class="form-control">
+                                        <input type="text" placeholder="" id="shapcode" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-error">
-                                    <label class="col-lg-2 control-label">产品RFID标签码</label>
+                                    <label class="col-lg-2 control-label">产品名称</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="l-name" class="form-control">
+                                        <input type="text" placeholder="" id="productName" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">所在区域编号</label>
+                                    <label class="col-lg-2 control-label">产品价格</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">
+                                        <input type="text" placeholder="" id="price" class="form-control">
                                         
                                     </div>
-                                </div>								
-
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                </div>
+								<div class="form-group has-warning">
+                                    <label class="col-lg-2 control-label">产品图片</label>
+									
+                                    <div class="col-lg-10">
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div  id="imgBox" class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+												<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+											<div>
+												   <span class="btn btn-default btn-file">
+												   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+												   <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+												   <input type="file" id="productImg" class="default" accept=".JPG,.PNG,.JPEG,.GIF," onchange="preImg(this.id,'imgBox');" />
+												   </span>
+												<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+											</div>
+										</div>                                                                      
                                     </div>
                                 </div>
-                            </form>
+								
+								
+								
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button onclick="javascript:submitProductInfo()" class="btn btn-primary" type="button">提交</button>
+                                    </div>
+                                </div>
+								
+								<script>
+									function submitProductInfo(){
+										//alert("a");
+										var shapcode = $("#shapcode").val();
+										var productName = $("#productName").val();
+										var price = $("#price").val();
+										var productImg = document.getElementById('productImg').files[0];
+
+										var postData = new FormData();
+										
+										postData.append("shapcode",shapcode);
+										postData.append("pname",productName);
+										postData.append("price",price);
+										postData.append("picture",productImg);
+										
+										$.ajax({
+											type:"POST",
+											url:"<%= request.getContextPath()%>/supermarket/addPro",
+											data:postData,
+											dataType:"text",
+											async: false,  
+											cache: false,  
+											contentType: false,  
+											processData: false, 
+											success:function(data){
+												alert(data);				
+											}
+										});
+									}
+								</script>
+                            </div>
                         </div>
                     </section>
                 </div>
             </div>
-           
-                
         </div>
 	</div>
         <!--body wrapper end-->
@@ -174,6 +238,8 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
+<!--file upload-->
+<script type="text/javascript" src="js/bootstrap-fileupload.min.js"></script>
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
 

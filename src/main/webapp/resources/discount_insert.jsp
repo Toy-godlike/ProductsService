@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -27,11 +33,11 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="index.jsp"><img src="images/logo.png" alt=""></a>
+            <a href="<%=path%>/resources/index.jsp"><img src="images/logo.png" alt=""></a>
         </div>
 
         <div class="logo-icon text-center">
-            <a href="index.jsp"><img src="images/logo_icon.png" alt=""></a>
+            <a href="<%=path%>/resources/index.jsp"><img src="images/logo_icon.png" alt=""></a>
         </div>
         <!--logo and iconic logo end-->
 
@@ -44,9 +50,9 @@
                 <li class="menu-list nav-active"><a href=""><i class="fa fa-laptop"></i> <span>录入信息</span></a>
                     <ul class="sub-menu-list">
                         <li ><a href="area_insert.jsp"> 超市地图 </a></li>
-                        <li class="active"><a href="product_insert.html"> 产品信息 </a></li>
-                        <li><a href="onsale_insert.html">产品上架</a></li>
-                        <li><a href="discount_insert.html"> 打折信息</a></li>
+                        <li ><a href="product_insert.jsp"> 产品信息 </a></li>
+                        <li ><a href="onsale_insert.jsp">产品上架</a></li>
+                        <li class="active"><a href="discount_insert.jsp"> 打折信息</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
@@ -103,7 +109,7 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                产品信息录入
+                产品打折信息录入
             </h3>
         </div>
         <!-- page heading end-->
@@ -115,44 +121,73 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            产品信息
+                            产品打折信息
                         </header>
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal adminex-form">
+                            <div role="form" class="form-horizontal adminex-form">
                                 <div class="form-group has-success">
-                                    <label class="col-lg-2 control-label">产品条形码</label>
+                                    <label class="col-lg-2 control-label">打折信息编号</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="f-name" class="form-control">
+                                        <input type="text" placeholder="" id="discountNum" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-error">
-                                    <label class="col-lg-2 control-label">产品名称</label>
+                                    <label class="col-lg-2 control-label">产品条形码</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="l-name" class="form-control">
+                                        <input type="text" placeholder="" id="shapcode" class="form-control">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">产品价格</label>
+                                    <label class="col-lg-2 control-label">打折比率</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">
+                                        <input type="text" placeholder="" id="discountRate" class="form-control">
+                                        
+                                    </div>
+                                </div>								
+								<div class="form-group has-warning">
+                                    <label class="col-lg-2 control-label">开始日期</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" placeholder="" id="startDate" class="form-control">
                                         
                                     </div>
                                 </div>
 								<div class="form-group has-warning">
-                                    <label class="col-lg-2 control-label">产品图片</label>
+                                    <label class="col-lg-2 control-label">结束日期</label>
                                     <div class="col-lg-10">
-                                        <input type="text" placeholder="" id="email2" class="form-control">                                       
+                                        <input type="text" placeholder="" id="endDate" class="form-control">
+                                        
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-primary" type="submit">提交</button>
+                                        <button class="btn btn-primary" onclick="javascript:submitDiscountInfo()" type="button">提交</button>
                                     </div>
                                 </div>
-                            </form>
+								<script>
+									function submitDiscountInfo(){
+										//alert("a");
+										var discountNum = $("#discountNum").val();
+										var shapcode = $("#shapcode").val();
+										var discountRate = $("#discountRate").val();
+										var startDate = $("#startDate").val();
+										var endDate = $("#endDate").val();
+										var postData = "d_num="+discountNum+"&shapcode="+shapcode+"&disc="+discountRate+
+														"&beginDate="+startDate+"&endDate="+endDate;
+										$.ajax({
+											type:"POST",
+											url:"<%= request.getContextPath()%>/supermarket/addDis",
+											data:postData,
+											dataType:"text",
+											success:function(data){
+												alert(data);				
+											}
+										});
+									}
+								
+								</script>
+                            </div>
                         </div>
                     </section>
                 </div>
