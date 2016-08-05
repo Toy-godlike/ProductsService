@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -56,12 +62,12 @@
                 </li>
                 <li class="menu-list  nav-active"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
                     <ul class="sub-menu-list">
-                        <li ><a href="area_info.html"> 超市地图</a></li>
-                        <li ><a href="product_info.html"> 产品信息</a></li>
-                        <li class="active"><a href="onsale_info.html"> 上架信息</a></li>
-                        <li><a href="discount_info.html"> 打折信息</a></li>
+                        <li ><a href="area_info.jsp"> 超市地图</a></li>
+                        <li><a href="product_info.jsp"> 产品信息</a></li>
+                        <li ><a href="onsale_info.jsp"> 上架信息</a></li>
+                        <li ><a href="discount_info.jsp"> 打折信息</a></li>
                         <li><a href="user_info.html"> 用户信息</a></li>
-                        <li><a href="sale_record_info.html"> 购物记录</a></li>
+                        <li  class="active"><a href="sale_record_info.jsp"> 购物记录</a></li>
                     </ul>
                 </li>
                 
@@ -108,7 +114,7 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                上架信息查询
+                购物记录信息查询
             </h3>
         </div>
         <!-- page heading end-->
@@ -118,7 +124,7 @@
         <div class="col-sm-12">
         <section class="panel">
         <header class="panel-heading">
-            上架信息
+            购物记录信息
             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                 <a href="javascript:;" class="fa fa-times"></a>
@@ -129,77 +135,16 @@
         <table  class="display table table-bordered table-striped" id="dynamic-table">
         <thead>
 			<tr>
-				<th>产品条形码</th>
-				<th>产品RFID标签码</th>
-				<th>所在区域编号</th>           
+				<th>购物编号</th>
+				<th>商品RFID标签码</th>
+                <th>商品条形码</th>
+				<th>购买时间</th>
+				<th>商品原价</th>
+                <th>商品购买价格</th>
 			</tr>
         </thead>
-        <tbody>
-        <tr class="gradeX">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 4.0</td>
-            <td>Win 95+</td>
-        </tr>
-        <tr class="gradeC">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 5.0</td>
-            <td>Win 95+</td>          
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 5.5</td>
-            <td>Win 95+</td>            
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 6</td>
-            <td>Win 98+</td>          
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 7</td>
-            <td>Win XP SP2+</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>AOL browser (AOL desktop)</td>
-            <td>Win XP</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.5</td>
-            <td>Win 98+ / OSX.2+</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 2.0</td>
-            <td>Win 98+ / OSX.2+</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 3.0</td>
-            <td>Win 2k+ / OSX.3+</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Camino 1.0</td>
-            <td>OSX.2+</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Camino 1.5</td>
-            <td>OSX.3+</td>
-        </tr>
+        <tbody id="saleRecordTableBody">
+        
         
         </tbody>
         
@@ -241,6 +186,33 @@
 
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
+<!--自定义js-->
+<script>
+	//接收json表格数据
+	$.ajax({
+		type:"GET",
+		url:"action.json",
+		dataType:"text",
+		async: false,  
+		cache: false,  
+		contentType: false,  
+		processData: false,
+		success:function(data,status,jqXHR){
+			
+			//var info = $.parseJSON(data);
+			var info = eval(data);
+			$.each(info,function(){
+				$("#saleRecordTableBody").append("<tr class='gradeA'><td>"+this.s_num+"</td> <td>"
+											+this.rfid+"</td> <td>"+this.shapcode+"</td> <td>"
+                                            +this.s_date+"</td><td>"+this.o_price+"</td><td>"
+                                            +this.s_price+"</td></tr>"
+				);
+			
+			});
+						
+		}
+	});
 
+</script>
 </body>
 </html>

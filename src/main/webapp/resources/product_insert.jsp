@@ -7,32 +7,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="ThemeBucket">
-  <link rel="shortcut icon" href="#" type="image/png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>超市信息管理系统</title>
+    <title>超市信息管理系统</title>
 
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet">
-  
-  
-  <!--multi-select-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+
+
+    <!--multi-select-->
     <link rel="stylesheet" type="text/css" href="js/jquery-multi-select/css/multi-select.css" />
 
     <!--file upload-->
     <link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.min.css" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body class="sticky-header">
+<body class="sticky-header" >
 
 <section>
     <!-- left side start-->
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <!--logo and iconic logo end-->
 
-		<!--左侧栏-->
+        <!--左侧栏-->
         <div class="left-side-inner">
 
             <!--sidebar nav start-->
@@ -64,15 +64,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="area_info.html"> 超市地图</a></li>
-                        <li><a href="product_info.html"> 产品信息</a></li>
-                        <li><a href="onsale_info.html"> 上架信息</a></li>
-                        <li><a href="discount_info.html"> 打折信息</a></li>
+                        <li><a href="area_info.jsp"> 超市地图</a></li>
+                        <li><a href="product_info.jsp"> 产品信息</a></li>
+                        <li><a href="onsale_info.jsp"> 上架信息</a></li>
+                        <li><a href="discount_info.jsp"> 打折信息</a></li>
                         <li><a href="user_info.html"> 用户信息</a></li>
-                        <li><a href="sale_record_info.html"> 购物记录</a></li>
+                        <li><a href="sale_record_info.jsp"> 购物记录</a></li>
                     </ul>
                 </li>
-                
+
                 <li><a href="login.html"><i class="fa fa-sign-in"></i> <span>注销</span></a></li>
 
             </ul>
@@ -81,35 +81,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <!-- left side end-->
-    
+
     <!-- main content start-->
     <div class="main-content" >
 
         <!-- header section start-->
         <div class="header-section">
 
-			<!--toggle button start  侧边栏开关按钮-->
-			<a class="toggle-btn"><i class="fa fa-bars"></i></a>
-			<!--toggle button end-->
+            <!--toggle button start  侧边栏开关按钮-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
 
-			<!--notification menu start 用户栏-->
-			<div class="menu-right">
-				<ul class="notification-menu">                        
-						
-					<li>
-						<a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<img src="images/photos/user-avatar.png" alt="" />
-							John Doe
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-usermenu pull-right">              
-							<li><a href="#"><i class="fa fa-cog"></i>  设置</a></li>
-							<li><a href="#"><i class="fa fa-sign-out"></i>注销</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<!--notification menu end -->
+            <!--notification menu start 用户栏-->
+            <div class="menu-right">
+                <ul class="notification-menu">
+
+                    <li>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <img src="images/photos/user-avatar.png" alt="" />
+                            John Doe
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="#"><i class="fa fa-cog"></i>  设置</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out"></i>注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--notification menu end -->
         </div>
         <!-- header section end-->
 
@@ -136,97 +136,104 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label class="col-lg-2 control-label">产品条形码</label>
                                     <div class="col-lg-10">
                                         <input type="text" placeholder="" id="shapcode" class="form-control">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="form-group has-error">
                                     <label class="col-lg-2 control-label">产品名称</label>
                                     <div class="col-lg-10">
                                         <input type="text" placeholder="" id="productName" class="form-control">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="form-group has-warning">
                                     <label class="col-lg-2 control-label">产品价格</label>
                                     <div class="col-lg-10">
                                         <input type="text" placeholder="" id="price" class="form-control">
-                                        
+
                                     </div>
                                 </div>
-								<div class="form-group has-warning">
+                                <div class="form-group has-warning">
                                     <label class="col-lg-2 control-label">产品图片</label>
-									
+
                                     <div class="col-lg-10">
-										<div class="fileupload fileupload-new" data-provides="fileupload">
-											<div  id="imgBox" class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-												<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-											</div>
-											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-											<div>
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div  id="imgBox" class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                            </div>
+                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                            <div>
 												   <span class="btn btn-default btn-file">
 												   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
 												   <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
 												   <input type="file" id="productImg" class="default" accept=".JPG,.PNG,.JPEG,.GIF," onchange="preImg(this.id,'imgBox');" />
 												   </span>
-												<a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
-											</div>
-										</div>                                                                      
+                                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-								
-								
-								
+
+
+
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button onclick="javascript:submitProductInfo()" class="btn btn-primary" type="button">提交</button>
                                     </div>
                                 </div>
-								
-								<script>
-									function submitProductInfo(){
-										//alert("a");
-										var shapcode = $("#shapcode").val();
-										var productName = $("#productName").val();
-										var price = $("#price").val();
-										var productImg = document.getElementById('productImg').files[0];
 
-										var postData = new FormData();
-										
-										postData.append("shapcode",shapcode);
-										postData.append("pname",productName);
-										postData.append("price",price);
-										postData.append("picture",productImg);
-										
-										$.ajax({
-											type:"POST",
-											url:"<%= request.getContextPath()%>/supermarket/addPro",
-											data:postData,
-											dataType:"text",
-											async: false,  
-											cache: false,  
-											contentType: false,  
-											processData: false, 
-											success:function(data){
-												alert(data);				
-											}
-										});
-									}
-								</script>
+                                <script>
+                                    function submitProductInfo(){
+                                        //alert("a");
+                                        var shapcode = $("#shapcode").val();
+                                        var productName = $("#productName").val();
+                                        var price = $("#price").val();
+                                        var productImg = document.getElementById('productImg').files[0];
+                                        //alert(productImg.name);
+
+                                        var postData = new FormData();
+
+                                        postData.append("shapcode",shapcode);
+                                        postData.append("pname",productName);
+                                        postData.append("price",price);
+                                        postData.append("picture",productImg);
+
+                                        $.ajax({
+                                            type:"POST",
+                                            url:"<%= request.getContextPath()%>/supermarket/addPro",
+                                            data:postData,
+                                            dataType:"text",
+                                            async: false,
+                                            cache: false,
+                                            contentType: false,
+                                            processData: false,
+                                            success:function(data){
+                                                alert(data);
+                                            }
+                                        });
+
+                                    }
+
+
+                                </script>
+
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
-        </div>
-	</div>
-        <!--body wrapper end-->
-        <!--body wrapper end-->
 
-        <!--footer section start-->
-        <footer class="sticky-footer">
-            2016 &copy;  by SHU
-        </footer>
-        <!--footer section end-->
+
+        </div>
+    </div>
+    <!--body wrapper end-->
+    <!--body wrapper end-->
+
+    <!--footer section start-->
+    <footer class="sticky-footer">
+        2016 &copy;  by SHU
+    </footer>
+    <!--footer section end-->
     </div>
     <!-- main content end-->
 </section>

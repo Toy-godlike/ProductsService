@@ -53,6 +53,6 @@ public class SoldDAOImpl implements SoldDAO{
     }
 
     public List getSolds() {
-        return getCurrentSession().createQuery("from Sold").list();
+        return getCurrentSession().createQuery("from Sold order by s_num asc").list();
     }
 }

@@ -57,12 +57,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="<%=path%>/resources/area_info.html"> 超市地图</a></li>
-                        <li><a href="<%=path%>/resources/product_info.html"> 产品信息</a></li>
-                        <li><a href="<%=path%>/resources/onsale_info.html"> 上架信息</a></li>
-                        <li><a href="<%=path%>/resources/discount_info.html"> 打折信息</a></li>
+                        <li><a href="<%=path%>/resources/area_info.jsp"> 超市地图</a></li>
+                        <li><a href="<%=path%>/resources/product_info.jsp"> 产品信息</a></li>
+                        <li><a href="<%=path%>/resources/onsale_info.jsp"> 上架信息</a></li>
+                        <li><a href="<%=path%>/resources/discount_info.jsp"> 打折信息</a></li>
                         <li><a href="<%=path%>/resources/user_info.html"> 用户信息</a></li>
-                        <li><a href="<%=path%>/resources/sale_record_info.html"> 购物记录</a></li>
+                        <li><a href="<%=path%>/resources/sale_record_info.jsp"> 购物记录</a></li>
                     </ul>
                 </li>
                 

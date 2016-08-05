@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -56,12 +62,12 @@
                 </li>
                 <li class="menu-list  nav-active"><a href=""><i class="fa fa-book"></i> <span>信息查询</span></a>
                     <ul class="sub-menu-list">
-                        <li class="active"><a href="area_info.html"> 超市地图</a></li>
-                        <li><a href="product_info.html"> 产品信息</a></li>
-                        <li><a href="onsale_info.html"> 上架信息</a></li>
-                        <li><a href="discount_info.html"> 打折信息</a></li>
+                        <li class="active"><a href="area_info.jsp"> 超市地图</a></li>
+                        <li><a href="product_info.jsp"> 产品信息</a></li>
+                        <li><a href="onsale_info.jsp"> 上架信息</a></li>
+                        <li><a href="discount_info.jsp"> 打折信息</a></li>
                         <li><a href="user_info.html"> 用户信息</a></li>
-                        <li><a href="sale_record_info.html"> 购物记录</a></li>
+                        <li><a href="sale_record_info.jsp"> 购物记录</a></li>
                     </ul>
                 </li>
                 
@@ -73,7 +79,7 @@
         </div>
     </div>
     <!-- left side end-->
-    
+   
     <!-- main content start-->
     <div class="main-content" >
 
@@ -104,13 +110,14 @@
 			<!--notification menu end -->
         </div>
         <!-- header section end-->
-
+		
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
                 区域信息查询
             </h3>
         </div>
+		
         <!-- page heading end-->
 		<!--body wrapper start-->
         <div class="wrapper">
@@ -134,8 +141,9 @@
 				<th>所在位置</th>           
 			</tr>
         </thead>
-        <tbody>
-        <tr class="gradeX">
+        <tbody id="areaTableBody">
+        <!--
+		<tr class="gradeX">
             <td>Trident</td>
             <td>Internet
                 Explorer 4.0</td>
@@ -200,9 +208,9 @@
             <td>Camino 1.5</td>
             <td>OSX.3+</td>
         </tr>
-        
+        -->
         </tbody>
-        
+       
         </table>
         </div>
         </div>
@@ -225,6 +233,9 @@
     <!-- main content end-->
 </section>
 
+ 
+
+
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -241,6 +252,43 @@
 
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
+
+
+<!--自定义js-->
+<script>
+	//接收json表格数据
+	$.ajax({
+		type:"GET",
+		url:"<%= request.getContextPath()%>/info/area",
+		dataType:"text",
+		async: false,  
+		cache: false,  
+		contentType: false,  
+		processData: false,
+		success:function(data,status,jqXHR){
+			
+			//var info = $.parseJSON(data);
+			var info = eval(data);
+			$.each(info,function(){
+				$("#areaTableBody").append("<tr class='gradeA'><td>"+this.a_num+"</td> <td>"
+											+this.a_name+"</td> <td>"+this.location+"</td> </tr>"
+				);
+			
+			});
+						
+		}
+	});
+
+	
+	
+	//在表格中插入数据
+	//alert("a");
+	//$("#areaTableBody").append("<tr> <td>Gecko</td> <td>Camino 1.5</td> <td>OSX.3+</td> </tr>");
+	//alert("a");
+		
+
+</script>
+
 
 </body>
 </html>

@@ -44,6 +44,6 @@ public class AreaDAOImpl implements AreaDAO {
     }
 
     public List getAreas() {
-        return getCurrentSession().createQuery("from Area").list();
+        return getCurrentSession().createQuery("from Area order by a_num asc").list();
     }
 }

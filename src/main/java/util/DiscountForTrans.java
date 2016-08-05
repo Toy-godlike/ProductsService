@@ -1,5 +1,7 @@
 package util;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +15,9 @@ public class DiscountForTrans implements Serializable {
     private int d_num;
     private String shapcode;
     private float disc;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date beginDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     public DiscountForTrans() {
