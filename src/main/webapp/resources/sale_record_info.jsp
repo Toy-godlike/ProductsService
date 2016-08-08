@@ -188,10 +188,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/scripts.js"></script>
 <!--自定义js-->
 <script>
-	//接收json表格数据
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    }
+    //接收json表格数据
 	$.ajax({
 		type:"GET",
-		url:"action.json",
+		url:"<%= request.getContextPath()%>/info/sold",
 		dataType:"text",
 		async: false,  
 		cache: false,  
@@ -204,7 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.each(info,function(){
 				$("#saleRecordTableBody").append("<tr class='gradeA'><td>"+this.s_num+"</td> <td>"
 											+this.rfid+"</td> <td>"+this.shapcode+"</td> <td>"
-                                            +this.s_date+"</td><td>"+this.o_price+"</td><td>"
+                                            +getLocalTime(this.s_date)+"</td><td>"+this.o_price+"</td><td>"
                                             +this.s_price+"</td></tr>"
 				);
 			

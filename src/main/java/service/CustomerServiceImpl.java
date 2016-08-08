@@ -130,6 +130,22 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
+    public List getProductByArea(int a_num) {
+        List<String> list = onSaleDAO.getShapcode(a_num);
+        List plist = new ArrayList();
+        plist.add(areaDAO.getArea(a_num));
+        for (int i = 0;i < list.size();i++){
+            Products products = productsDAO.getProducts(list.get(i));
+            ProductForTrans productForTrans = new ProductForTrans();
+            productForTrans.setShapcode(products.getShapcode());
+            productForTrans.setPname(products.getPname());
+            productForTrans.setPrice(products.getPrice());
+            productForTrans.setPicture(products.getPicture());
+            plist.add(productForTrans);
+        }
+        return plist;
+    }
+
     /*public boolean saveSolds(Sold[] solds) {
         try {
             for (int i = 0; i < solds.length; i++) {

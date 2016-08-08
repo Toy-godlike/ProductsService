@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,8 +65,9 @@ public class OnSaleServiceImpl implements OnSaleService {
 
     }
 
-    public int getAnum(String shapcode) {
-        int temp = onSaleDAO.getAnum(shapcode);
-        return temp;
+    public int getAnum(int anum) {
+        List list = onSaleDAO.getShapcode(anum);
+        int a = list.size();
+        return a;
     }
 }

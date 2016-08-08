@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Area;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
+import util.DiscountForTrans;
+import util.ProductForTrans;
 import util.ProductInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,9 +54,16 @@ public class CustomerController {
     @RequestMapping(value = "/getDis",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getDiscountInfo(){
-       List list = customerService.getDiscounts();
-        Map<String, Object> modelMap = new HashMap<String, Object>(1);
-        modelMap.put("discountInfo",list);
+        List list = customerService.getDiscounts();
+        List<ProductForTrans> plist = new ArrayList<ProductForTrans>();
+        List<DiscountForTrans> dlist = new ArrayList<DiscountForTrans>();
+        for (int i = 0;i < list.size();i = i + 2){
+            plist.add((ProductForTrans) list.get(i));
+            dlist.add((DiscountForTrans) list.get(i + 1));
+        }
+        Map<String, Object> modelMap = new HashMap<String, Object>(2);
+        modelMap.put("products",plist);
+        modelMap.put("discounts",dlist);
         return modelMap;
     }
 
@@ -105,8 +116,31 @@ public class CustomerController {
             e.printStackTrace();
         }*/
         List list = customerService.getProductLoc(pname);
-        Map<String, Object> modelMap = new HashMap<String, Object>(1);
-        modelMap.put("location",list);
+        List<ProductForTrans> plist = new ArrayList<ProductForTrans>();
+        List<Area> alist = new ArrayList<Area>();
+        for (int i = 0;i < list.size();i = i + 2){
+            plist.add((ProductForTrans) list.get(i));
+            alist.add((Area) list.get(i + 1));
+        }
+        Map<String, Object> modelMap = new HashMap<String, Object>(2);
+        modelMap.put("products",plist);
+        modelMap.put("locations",alist);
+        return modelMap;
+    }
+
+    @RequestMapping(value="/claPro",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> searchProductLoc(@RequestParam("anum") int anum) {
+        List list = customerService.getProductByArea(anum);
+        List<ProductForTrans> plist = new ArrayList<ProductForTrans>();
+        List<Area> alist = new ArrayList<Area>();
+        alist.add((Area) list.get(0));
+        for (int i = 1;i < list.size();i++){
+            plist.add((ProductForTrans) list.get(i));
+        }
+        Map<String, Object> modelMap = new HashMap<String, Object>(2);
+        modelMap.put("products",plist);
+        modelMap.put("locations",alist);
         return modelMap;
     }
 }

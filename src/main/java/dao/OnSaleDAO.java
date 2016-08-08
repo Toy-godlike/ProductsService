@@ -15,4 +15,5 @@ public interface OnSaleDAO {
     public OnSale getOnSale(String rfid);
     public List getOnSales();
     public int getAnum(String shapcode);
+    public List getShapcode(int a_num);
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import entity.OnSale;
+import entity.Products;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,11 @@ public class OnSaleDAOImpl implements OnSaleDAO {
         Integer anum = (Integer) getCurrentSession().createQuery("select distinct area.a_num from OnSale where products.shapcode = :key1")
                 .setString("key1",shapcode).uniqueResult();
         return anum;
+    }
+
+    public List getShapcode(int anum) {
+        List<String> list = getCurrentSession().createQuery("select distinct products.shapcode from OnSale where area.a_num = :key1")
+                .setInteger("key1",anum).list();
+        return list;
     }
 }

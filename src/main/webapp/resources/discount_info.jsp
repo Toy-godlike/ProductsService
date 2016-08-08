@@ -187,10 +187,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/scripts.js"></script>
 <!--自定义js-->
 <script>
-	//接收json表格数据
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    }
+    //接收json表格数据
 	$.ajax({
 		type:"GET",
-		url:"action.json",
+		url:"<%= request.getContextPath()%>/info/discount",
 		dataType:"text",
 		async: false,  
 		cache: false,  
@@ -203,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.each(info,function(){
 				$("#discountTableBody").append("<tr class='gradeA'><td>"+this.d_num+"</td> <td>"
 											+this.shapcode+"</td> <td>"+this.disc+"</td> <td>"
-                        +this.beginDate+"</td><td>"+this.endDate+"</td></tr>"
+                        +getLocalTime(this.beginDate)+"</td><td>"+getLocalTime(this.endDate)+"</td></tr>"
 				);
 			
 			});

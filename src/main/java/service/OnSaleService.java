@@ -11,5 +11,5 @@ public interface OnSaleService {
     public OnSale getOnSale(String rfid);
     public Discount getDiscountByShapcode(String shapcode);
     public void saveDiscount();
-    public int getAnum(String shapcode);
+    public int getAnum(int anum);
 }

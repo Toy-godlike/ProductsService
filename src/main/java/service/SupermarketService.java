@@ -1,11 +1,9 @@
 package service;
 
-import entity.Area;
-import entity.Discount;
-import entity.OnSale;
-import entity.Products;
+import entity.*;
 import util.DiscountForTrans;
 import util.OnSaleForTrans;
+import util.ProductForTrans;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -20,8 +18,9 @@ public interface SupermarketService {
     public boolean saveDiscount(DiscountForTrans discountForTrans);
     public boolean saveArea(Area area);
     public boolean saveProduct(Products products);
-    public List<OnSale> getOnSales();
-    public List<Discount> getDiscounts();
-    public List<Products> getProductsAll();
+    public List<OnSaleForTrans> getOnSales();
+    public List<DiscountForTrans> getDiscounts();
+    public List<ProductForTrans> getProductsAll();
     public List<Area> getAreas();
+    public List<Sold> getSolds();
 }

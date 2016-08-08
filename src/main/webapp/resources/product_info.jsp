@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//接收json表格数据
 	$.ajax({
 		type:"GET",
-		url:"action.json",
+		url:"<%= request.getContextPath()%>/info/product",
 		dataType:"text",
 		async: false,  
 		cache: false,  

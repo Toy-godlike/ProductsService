@@ -1,20 +1,15 @@
 package service;
 
-import dao.AreaDAO;
-import dao.DiscountDAO;
-import dao.OnSaleDAO;
-import dao.ProductsDAO;
-import entity.Area;
-import entity.Discount;
-import entity.OnSale;
-import entity.Products;
+import dao.*;
+import entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import util.DiscountForTrans;
 import util.OnSaleForTrans;
+import util.ProductForTrans;
 
-import javax.jws.WebService;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +30,9 @@ public class SupermarketServiceImpl implements SupermarketService {
 
     @Autowired
     private ProductsDAO productsDAO;
+
+    @Autowired
+    private SoldDAO soldDAO;
 
     public boolean saveOnSale(OnSaleForTrans onSaleForTrans) {
         Products products = productsDAO.getProducts(onSaleForTrans.getShapcode());
@@ -89,19 +87,53 @@ public class SupermarketServiceImpl implements SupermarketService {
         }
     }
 
-    public List<OnSale> getOnSales() {
-        return onSaleDAO.getOnSales();
+    public List<OnSaleForTrans> getOnSales() {
+        List<OnSale> list = onSaleDAO.getOnSales();
+        List<OnSaleForTrans> olist = new ArrayList<OnSaleForTrans>();
+        for (int i = 0;i < list.size();i++){
+            OnSaleForTrans onSaleForTrans = new OnSaleForTrans();
+            onSaleForTrans.setRfid(list.get(i).getRfid());
+            onSaleForTrans.setShapcode(list.get(i).getProducts().getShapcode());
+            onSaleForTrans.setA_num(list.get(i).getArea().getA_num());
+            olist.add(onSaleForTrans);
+        }
+        return olist;
     }
 
-    public List<Discount> getDiscounts() {
-        return discountDAO.getDiscounts();
+    public List<DiscountForTrans> getDiscounts() {
+        List<Discount> list = discountDAO.getDiscounts();
+        List<DiscountForTrans> dlist = new ArrayList<DiscountForTrans>();
+        for (int i = 0;i < list.size();i++){
+            DiscountForTrans discountForTrans = new DiscountForTrans();
+            discountForTrans.setD_num(list.get(i).getD_num());
+            discountForTrans.setShapcode(list.get(i).getProducts().getShapcode());
+            discountForTrans.setDisc(list.get(i).getDisc());
+            discountForTrans.setBeginDate(list.get(i).getBeginDate());
+            discountForTrans.setEndDate(list.get(i).getEndDate());
+            dlist.add(discountForTrans);
+        }
+        return dlist;
     }
 
-    public List<Products> getProductsAll() {
-        return productsDAO.getProductsAll();
+    public List<ProductForTrans> getProductsAll() {
+        List<Products> list = productsDAO.getProductsAll();
+        List<ProductForTrans> plist = new ArrayList<ProductForTrans>();
+        for (int i = 0;i < list.size();i++){
+            ProductForTrans productForTrans = new ProductForTrans();
+            productForTrans.setShapcode(list.get(i).getShapcode());
+            productForTrans.setPname(list.get(i).getPname());
+            productForTrans.setPrice(list.get(i).getPrice());
+            productForTrans.setPicture(list.get(i).getPicture());
+            plist.add(productForTrans);
+        }
+        return plist;
     }
 
     public List<Area> getAreas() {
         return areaDAO.getAreas();
+    }
+
+    public List<Sold> getSolds() {
+        return soldDAO.getSolds();
     }
 }

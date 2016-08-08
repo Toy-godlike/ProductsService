@@ -135,8 +135,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table  class="display table table-bordered table-striped" id="dynamic-table">
         <thead>
 			<tr>
-				<th>产品条形码</th>
 				<th>产品RFID标签码</th>
+				<th>产品条形码</th>
 				<th>所在区域编号</th>           
 			</tr>
         </thead>
@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//接收json表格数据
 	$.ajax({
 		type:"GET",
-		url:"action.json",
+		url:"<%= request.getContextPath()%>/info/onsale",
 		dataType:"text",
 		async: false,  
 		cache: false,  
