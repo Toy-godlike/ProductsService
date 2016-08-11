@@ -72,7 +72,7 @@ public class SupermarketController {
                     // 保存的文件路径(如果用的是Tomcat服务器，文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中  )
                     String filePath = request.getSession().getServletContext()
                             .getRealPath("/") + "upload/" + myfile.getOriginalFilename();
-                    picture = "http://139.129.28.167/ProductService/upload/" + myfile.getOriginalFilename();
+                    picture = "http://139.129.28.167/ProductService/resources/upload/" + myfile.getOriginalFilename();
                     System.out.println(filePath);
                     File saveDir = new File(filePath);
                     if (!saveDir.getParentFile().exists())
