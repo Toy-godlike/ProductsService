@@ -108,13 +108,19 @@ public class CustomerController {
 
     @RequestMapping(value="/search",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> searchProductLoc(@RequestParam("pname") String pname){
+    public Map<String,Object> searchProductLoc(HttpServletRequest request){
 /*        String name = "";
         try {
             name = URLDecoder.decode(pname, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }*/
+        String pname = request.getParameter("pname");
+        try {
+            pname = new String(pname.getBytes("ISO8859-1"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         List list = customerService.getProductLoc(pname);
         List<ProductForTrans> plist = new ArrayList<ProductForTrans>();
         List<Area> alist = new ArrayList<Area>();

@@ -50,11 +50,15 @@ public class CustomerServiceImpl implements CustomerService{
         areaForTrans.setLocation(onSale.getArea().getLocation());
         Discount discount = discountDAO.getDiscountByShapcode(onSale.getProducts().getShapcode());
         DiscountForTrans discountForTrans = new DiscountForTrans();
-        discountForTrans.setShapcode(discount.getProducts().getShapcode());
-        discountForTrans.setD_num(discount.getD_num());
-        discountForTrans.setDisc(discount.getDisc());
-        discountForTrans.setBeginDate(discount.getBeginDate());
-        discountForTrans.setEndDate(discount.getEndDate());
+        if (discount != null) {
+            discountForTrans.setShapcode(discount.getProducts().getShapcode());
+            discountForTrans.setD_num(discount.getD_num());
+            discountForTrans.setDisc(discount.getDisc());
+            discountForTrans.setBeginDate(discount.getBeginDate());
+            discountForTrans.setEndDate(discount.getEndDate());
+        }else{
+            discountForTrans = null;
+        }
         ProductInfo productInfo = new ProductInfo(productForTrans,areaForTrans,discountForTrans);
         return productInfo;
     }
