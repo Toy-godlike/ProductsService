@@ -1,8 +1,8 @@
 package controller;
 
 import entity.Area;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +84,8 @@ public class CustomerController {
             }
             br.close();
             reqMessage = sb.toString();
-            reqarray = new JSONArray(reqMessage);
-            for (int i = 0;i < reqarray.length();i++){
+            reqarray = JSONArray.fromObject(reqMessage);
+            for (int i = 0;i < reqarray.size();i++){
                 JSONObject jsonObject = reqarray.getJSONObject(i);
                 result = customerService.saveSold(jsonObject.getInt("s_num"),jsonObject.getString("shapcode"),
                         jsonObject.getString("rfid"),jsonObject.getString("s_date"),jsonObject.getDouble("s_price"),
