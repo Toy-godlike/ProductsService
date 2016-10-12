@@ -149,4 +149,16 @@ public class CustomerController {
         modelMap.put("locations",alist);
         return modelMap;
     }
+
+    @RequestMapping(value = "/orders",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> showOrders(HttpServletRequest request) {
+        return null;
+    }
+
+    @RequestMapping(value = "/detail",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> showDetail(HttpServletRequest request) {
+        return null;
+    }
 }
